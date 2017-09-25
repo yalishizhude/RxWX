@@ -1,0 +1,35 @@
+{
+  "name": "rxjs-wx",
+  "version": "1.0.1",
+  "description": "Based on Rx.js for Weixin miniprogram",
+  "main": "RxWX.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yalishizhude/RxWX.git"
+  },
+  "keywords": [
+    "RxJS",
+    "Weixin",
+    "wx",
+    "RxWX"
+  ],
+  "author": "yalishizhude",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yalishizhude/RxWX/issues"
+  },
+  "homepage": "https://github.com/yalishizhude/RxWX#readme"
+}

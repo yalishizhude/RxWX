@@ -1,0 +1,14 @@
+# RxWX compile environment
+version: '3'
+services:
+  compile:
+    image: node:7-alpine
+    container_name: rxwx
+    tty: true
+    stdin_open: true
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules 
+volumes:
+  node_modules:
