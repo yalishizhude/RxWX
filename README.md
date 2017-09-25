@@ -62,7 +62,8 @@ Rx.Observable.of(1)
 # 更多
 
 [RxJS](https://github.com/Reactive-Extensions/RxJS)
-[微信小程序API](https://mp.weixin.qq.com/debug/wxadoc/dev/api
+
+[微信小程序API](https://mp.weixin.qq.com/debug/wxadoc/dev/api)
 
 更多内容请关注公众号“web学习社”。
 
