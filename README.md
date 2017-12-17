@@ -2,7 +2,7 @@
 
 *Write less, do more elegantly!*
 
-封装了[RxJS](http://cn.rx.js.org/manual/overview.html)对象和微信小程序API，让你写出更优雅更简介的代码。
+封装了[RxJS](http://cn.rx.js.org/manual/overview.html)对象[微信小程序API](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)，让你写出更优雅更简介的代码。
 
 RxWX模块支持所有微信小程序中wx对象的属性和函数，例如`getUserInfo`等。
 RxWX模块的`Rx`属性为RxJS对象，支持RxJS对象所有属性，例如`Observable`等。
