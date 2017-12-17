@@ -70,7 +70,7 @@ import rxwx from '../../utils/RxWX.js'
 rxwx.removeStorage({key: 'xx'})
   .catch((e) => console.error('RxWX发现错误'))
   .subscribe((resp) => console.log(resp))
-``
+```
 
 ## 异步嵌套
 
@@ -99,7 +99,7 @@ rxwx.login()
   .switchMap(() => rxwx.getUserInfo())
   .catch(e => console.error(e))
   .subscribe(res => console.log(res.userInfo))
-``
+```
 
 ## 异步合并
 
