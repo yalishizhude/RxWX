@@ -145,7 +145,11 @@ Rx.Observable.zip(rxwx.getUserInfo(), rxwx.getSystemInfo())
 
 3. 使用rxwx
 
+`src/app.wpy`
+
 ![app.wpy文件](app.wpy.jpg)
+
+`src/pages/index.wpy`
 
 ![index.wpy文件](index.wpy.jpg)
 
