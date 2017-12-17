@@ -10,8 +10,8 @@ gulp.task('build', () => {
     .pipe(babel({
       presets: ['env']
     }))
-    // .pipe(concat('RxWX.js'))
     .pipe(uglify())
+    // .pipe(concat('RxWX.js'))
     .pipe(gulp.dest('./'))
 })
 

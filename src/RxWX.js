@@ -1,5 +1,11 @@
 import * as Rx from './Rx'
-let ob = {}
+let ob = {
+  Rx: {}
+}
+
+for (let p in Rx) {
+  ob.Rx[p] = Rx[p]
+}
 
 for (let p in wx) {
   switch (typeof wx[p]) {
