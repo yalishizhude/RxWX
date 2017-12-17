@@ -1,8 +1,11 @@
 # RxWX
 
+*Write less, do more elegantly!*
+
 封装了[RxJS](http://cn.rx.js.org/manual/overview.html)对象和微信小程序API，让你写出更优雅更简介的代码。
 
-*Write less, do more!*
+RxWX模块支持所有微信小程序中wx对象的属性和函数，例如`getUserInfo`等。
+RxWX模块的`Rx`属性为RxJS对象，支持RxJS对象所有属性，例如`Observable`等。
 
 # 安装
 
@@ -28,8 +31,7 @@
 
 # 小程序中使用示例
 
-代码路径：
-[https://github.com/yalishizhude/RxWX/tree/master/example](https://github.com/yalishizhude/RxWX/tree/master/example
+[源码地址](https://github.com/yalishizhude/RxWX/tree/master/example)
 
 # 同步函数
 ```
@@ -127,6 +129,7 @@ Rx.Observable.zip(rxwx.getUserInfo(), rxwx.getSystemInfo())
 ```
 
 # wepy中使用示例
+[源码地址](https://github.com/yalishizhude/RxWX/tree/master/example4wepy)
 
 1. 安装RxWX
 
@@ -140,11 +143,11 @@ Rx.Observable.zip(rxwx.getUserInfo(), rxwx.getSystemInfo())
 
 `import rxwx from 'rxjs-wx'`
 
-3. 使用rxw
+3. 使用rxwx
 
-{% asset_img app.wpy.jpg %}
+![app.wpy文件](app.wpy.jpg)
 
-{% asset_img index.wpy.jpg %}
+![index.wpy文件](index.wpy.jpg)
 
 # 更多
 
