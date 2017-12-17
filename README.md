@@ -1,5 +1,8 @@
 # RxWX
-让微信小程序支持[RxJS](http://cn.rx.js.org/manual/overview.html)，并基于[RxJS](http://cn.rx.js.org/manual/overview.html)重新封装微信小程序API。
+
+封装了[RxJS](http://cn.rx.js.org/manual/overview.html)对象和微信小程序API，让你写出更优雅更简介的代码。
+
+*Write less, do more!*
 
 # 安装
 
@@ -13,51 +16,135 @@
 
 `npm i rxjs-wx`
 
+使用yarn
+
+`yarn add rxjs-wx`
+
 2. 拷贝根目录下的Rx.js和RxWX.js到项目目录
 
 3. 引用文件
 
-`import obs from 'RxWX.js'`
+`import rxwx from 'RxWX.js'`
 
-# 使用
+# 小程序中使用示例
 
-## 使用Rx.js
+代码路径：
+[https://github.com/yalishizhude/RxWX/tree/master/example](https://github.com/yalishizhude/RxWX/tree/master/example
+
+# 同步函数
+```
+// 原写法
+try {
+  let result = wx.removeStorageSync('xx')
+  console.log(result) 
+} catch(e) {
+  console.error('小程序API发现错误')
+}
+
+// 使用RxWX，rxwx对象具有wx对象的所有函数和属性，函数返回Observable对象
+import rxwx from '../../utils/RxWX.js'
+
+rxwx.removeStorageSync('xx')
+  .catch((e) => console.error('RxWX发现错误'))
+  .subscribe((resp) => console.log(resp))
+```
+
+## 异步函数
 
 ```
-// 目录结构
-- pages
-- app.js
-- Rx.js
-- RxWX.js
+// 原写法
+wx.removeStorage({
+  key: 'xx',
+  success: function(res) {
+    console.log(res)
+  },
+  error: function(e) {
+    console.error('小程序API发现错误')
+  }
+})
+// 引用RxWX，rxwx对象函数参数与wx同名函数一致
+import rxwx from '../../utils/RxWX.js'
 
-// app/js
+rxwx.removeStorage({key: 'xx'})
+  .catch((e) => console.error('RxWX发现错误'))
+  .subscribe((resp) => console.log(resp))
+``
 
-import obs from 'RxWX.js'
-
-//获取系统信息
-obs.getSystemInfoSync()
-    .subscribe(x => console.log(x))
-
-```
-
-## 使用RxWX.js
-
-```
-// 目录结构
-- pages
-- app.js
-- Rx.js
-- RxWX.js
-
-// app/js
-
-import * as Rx from 'Rx.js'
-
-//获取系统信息
-Rx.Observable.of(1)
-    .subscribe(x => console.log(x))  // 1
+## 异步嵌套
 
 ```
+// 调用小程序原生API
+wx.login({
+  success(res) {
+    wx.getUserInfo({
+      success(res) {
+        console.log(res.userInfo)
+      },
+      fail(e) {
+        console.error(e)
+      }
+    })
+  },
+  fail(e) {
+    console.error(e)
+  }
+})
+
+// 调用RxWX
+import rxwx from '../../utils/RxWX.js'
+
+rxwx.login()
+  .switchMap(() => rxwx.getUserInfo())
+  .catch(e => console.error(e))
+  .subscribe(res => console.log(res.userInfo))
+``
+
+## 异步合并
+
+```
+// 调用小程序API
+let getUser =  new Promise((success, fail) => {
+  wx.getUserInfo({
+    success,
+    fail
+  })
+})
+let getSystem =  new Promise((success, fail) => {
+  wx.getSystemInfo({
+    success,
+    fail
+  })
+})
+Promise.all([getUser, getSystem])
+.then((resp) => console.log(resp), e => console.error(e))
+
+// 调用RxWX中的Rx对象，包含RxJS所有操作符和函数
+import rxwx, {Rx} from '../../utils/RxWX.js'
+// 使用zip操作符
+Rx.Observable.zip(rxwx.getUserInfo(), rxwx.getSystemInfo())
+  .catch(e => console.error(e))
+  .subscribe(resp => console.log(resp))
+```
+
+# wepy中使用示例
+
+1. 安装RxWX
+
+`npm i -S rxjs-wx`
+
+当然我跟推荐你使用yarn
+
+`yarn add rxjs-wx`
+
+2. 引入模块
+
+`import rxwx from 'rxjs-wx'`
+
+3. 使用rxw
+
+{% asset_img app.wpy.jpg %}
+
+{% asset_img index.wpy.jpg %}
 
 # 更多
 
