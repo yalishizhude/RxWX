@@ -1,6 +1,7 @@
 import a from '../demo/sync_async.js'
 import b from '../demo/nest.js'
 import c from '../demo/combine.js'
+import d from '../demo/network.js'
 
 //index.js
 //获取应用实例

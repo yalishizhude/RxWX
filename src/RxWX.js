@@ -1,4 +1,23 @@
 import * as Rx from './Rx'
+
+const cbObj2Obs = (obj, fn, returnMethod) => Rx.Observable.create(observe => {
+  let param = Object.assign({}, obj)
+  let pro = new Promise((resolve, reject) => {
+    param.success = (...arg) => {
+      resolve(...arg)
+    }
+    param.fail = (e) => reject(e)
+  })
+  let instance = fn.call(null, param) || {}
+  pro.then(res => {
+    observe.next(Object.assign(instance, res))
+    observe.complete()
+  }, e => {
+    observe.error(e, instance)
+    observe.complete()
+  })
+})
+
 let ob = {
   Rx: {}
 }
@@ -16,13 +35,7 @@ for (let p in wx) {
       if (/Sync$/.test(p)) {
         ob[p] = (obj) => Rx.Observable.of(wx[p].call(null, obj))
       } else {
-        ob[p] = (obj) => Rx.Observable.create(observe => {
-          let param = Object.assign({}, obj)
-          param.success = (...arg) => observe.next(...arg)
-          param.fail = (e) => observe.error(e)
-          param.complete = (res) => observe.complete()
-          wx[p].call(null, param)
-        })
+        ob[p] = (obj) => cbObj2Obs(obj, wx[p])
       }
       break;
     default:
