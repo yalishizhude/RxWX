@@ -127,6 +127,58 @@ Rx.Observable.zip(rxwx.getUserInfo(), rxwx.getSystemInfo())
   .catch(e => console.error(e))
   .subscribe(resp => console.log(resp))
 ```
+## 网络请求
+
+### http请求
+```
+let handlerA = (res) => console.log('handler a:', res)
+let handlerB = (res) => console.log('handler b:', res)
+// 调用小程序API
+let url = 'http://localhost:3456'
+wx.request({
+  url,
+  success(res) {
+    // 逻辑与请求的紧耦合
+    handlerA(res)
+    handlerB(res)
+  }
+})
+
+// 调用RxWX
+let req = rxwx.request({
+  url
+})
+// 轻轻松松将业务逻辑与请求分离
+req.subscribe(handlerA)
+req.subscribe(handlerB)
+```
+### websocket
+
+```
+let url = 'ws://localhost:34567'
+// 调用微信小程序API
+let ws = wx.connectSocket({
+  url
+})
+ws.onOpen(() => {
+  ws.send({ data: new Date })
+  ws.onMessage(msg => console.log(msg.data))
+  ws.close()
+  ws.onClose(msg => console.log('Websocket closed.'))
+})
+// 调用RxWX
+rxwx.connectSocket({
+  url
+})
+.subscribe(ws => {
+  ws.onOpen(() => {
+    ws.send({ data: new Date })
+    ws.onMessage(msg => console.log(msg.data))
+    ws.close()
+    ws.onClose(msg => console.log('Websocket closed.'))
+  })
+})
+```
 
 # wepy中使用示例
 [源码地址](https://github.com/yalishizhude/RxWX/tree/master/example4wepy)
