@@ -1,22 +1,17 @@
 import * as Rx from './Rx'
 
-const cbObj2Obs = (obj, fn, returnMethod) => Rx.Observable.create(observe => {
+const fromPromise = Rx.Observable.fromPromise
+const cbObj2Obs = (obj, fn, returnMethod) => {
   let param = Object.assign({}, obj)
-  let pro = new Promise((resolve, reject) => {
+  return fromPromise(new Promise((resolve, reject) => {
     param.success = (...arg) => {
       resolve(...arg)
     }
     param.fail = (e) => reject(e)
-  })
-  let instance = fn.call(null, param) || {}
-  pro.then(res => {
-    observe.next(Object.assign(instance, res))
-    observe.complete()
-  }, e => {
-    observe.error(e, instance)
-    observe.complete()
-  })
-})
+
+    fn.call(null, param)
+  }));
+}
 
 let ob = {
   Rx: {}
