@@ -7,6 +7,10 @@
 RxWX模块支持所有微信小程序中wx对象的属性和函数，例如`getUserInfo`等。
 RxWX模块的`Rx`属性为RxJS对象，支持RxJS对象所有属性，例如`Observable`等。
 
+# 快速起步
+
+直接下载种子项目[RxWX-seed](git@github.com:yalishizhude/RxWX-seed.git)解压即可开始编写小程序代码。
+
 # 安装
 
 1. 下载
