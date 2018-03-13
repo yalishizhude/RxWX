@@ -9,7 +9,7 @@ RxWX模块的`Rx`属性为RxJS对象，支持RxJS对象所有属性，例如`Obs
 
 # 快速起步
 
-直接下载种子项目[RxWX-seed](git@github.com:yalishizhude/RxWX-seed.git)解压即可开始编写小程序代码。
+直接下载种子项目[RxWX-seed](https://github.com/yalishizhude/RxWX-seed)解压即可开始编写小程序代码。
 
 # 安装
 
