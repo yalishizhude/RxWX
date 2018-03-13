@@ -1,21 +1,25 @@
 import * as Rx from './Rx'
 
 const cbObj2Obs = (obj, fn, returnMethod) => Rx.Observable.create(observe => {
-  let param = Object.assign({}, obj)
-  let pro = new Promise((resolve, reject) => {
-    param.success = (...arg) => {
-      resolve(...arg)
-    }
-    param.fail = (e) => reject(e)
-  })
-  let instance = fn.call(null, param) || {}
-  pro.then(res => {
-    observe.next(Object.assign(instance, res))
-    observe.complete()
-  }, e => {
-    observe.error(e, instance)
-    observe.complete()
-  })
+  if(typeof obj==='object' || typeof obj==='undefined') {
+    let param = Object.assign({}, obj)
+    let pro = new Promise((resolve, reject) => {
+      param.success = (...arg) => {
+        resolve(...arg)
+      }
+      param.fail = (e) => reject(e)
+    })
+    let instance = fn.call(null, param) || {}
+    pro.then(res => {
+      observe.next(Object.assign(instance, res))
+      observe.complete()
+    }, e => {
+      observe.error(e, instance)
+      observe.complete()
+    })
+  } else {
+    observe.next(fn.call(null, obj))
+  }
 })
 
 let ob = {
@@ -33,7 +37,7 @@ for (let p in wx) {
       break;
     case 'function':
       if (/Sync$/.test(p)) {
-        ob[p] = (obj) => Rx.Observable.of(wx[p].call(null, obj))
+        ob[p] = (...arg) => Rx.Observable.of(wx[p].call(null, ...arg))
       } else {
         ob[p] = (obj) => cbObj2Obs(obj, wx[p])
       }

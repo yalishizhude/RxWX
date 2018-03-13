@@ -31,7 +31,7 @@ RxWX模块的`Rx`属性为RxJS对象，支持RxJS对象所有属性，例如`Obs
 
 # 小程序中使用示例
 
-[源码地址](https://github.com/yalishizhude/RxWX/tree/master/example)
+[源码地址](https://github.com/yalishizhude/RxWX-example)
 
 ## 同步函数
 ```
@@ -181,13 +181,13 @@ rxwx.connectSocket({
 ```
 
 # wepy中使用示例
-[源码地址](https://github.com/yalishizhude/RxWX/tree/master/example4wepy)
+[源码地址](https://github.com/yalishizhude/RxWX-wepy-example)
 
 1. 安装RxWX
 
 `npm i -S rxjs-wx`
 
-当然我跟推荐你使用yarn
+当然我更推荐你使用yarn
 
 `yarn add rxjs-wx`
 
