@@ -184,6 +184,30 @@ rxwx.connectSocket({
 })
 ```
 
+## 事件绑定
+
+```
+import rxwx from '../../utils/RxWX.js'
+// 页面对象
+let page ={
+  data: {
+    // 页面数据...
+  },
+  onLoad: function () {
+    // 页面初始化
+  },
+}
+// 使用fromEvent绑定事件，返回Observable对象
+rxwx.fromEvent(page, 'bindViewTap')
+  .debounceTime(1000)  // 防抖
+  .switchMap(() => rxwx.navigateTo({
+    url: '../logs/logs'
+  }))  // 页面跳转
+  .subscribe()
+// 初始化页面逻辑
+Page(page)
+```
+
 # wepy中使用示例
 [源码地址](https://github.com/yalishizhude/RxWX-wepy-example)
 
