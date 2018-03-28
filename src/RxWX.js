@@ -1,7 +1,22 @@
 import * as Rx from './Rx'
 
+let ob = {
+  Rx: {},
+  fromEvent(data, eventName) {
+    var subject = new Rx.Subject()
+    data[eventName] = function(event) {
+      subject.next(event)
+    }
+    return subject
+  }
+}
+
+for (let p in Rx) {
+  ob.Rx[p] = Rx[p]
+}
+
 const cbObj2Obs = (obj, fn, returnMethod) => Rx.Observable.create(observe => {
-  if(typeof obj==='object' || typeof obj==='undefined') {
+  if (typeof obj === 'object' || typeof obj === 'undefined') {
     let param = Object.assign({}, obj)
     let pro = new Promise((resolve, reject) => {
       param.success = (...arg) => {
@@ -21,14 +36,6 @@ const cbObj2Obs = (obj, fn, returnMethod) => Rx.Observable.create(observe => {
     observe.next(fn.call(null, obj))
   }
 })
-
-let ob = {
-  Rx: {}
-}
-
-for (let p in Rx) {
-  ob.Rx[p] = Rx[p]
-}
 
 for (let p in wx) {
   switch (typeof wx[p]) {
